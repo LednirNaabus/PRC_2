@@ -77,7 +77,7 @@
           </div>  
         </form>
 
-        <div class="flex flex-col">
+        <div class="flex flex-col hidden md:block">
           <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                 <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
@@ -140,6 +140,46 @@
               </div>
             </div>
           </div>
+        </div>
+        <!--MOBILE-->
+        <div class="flex flex-col md:hidden mt-3">
+          <table>
+            <tbody class="bg-white divide-y divide-gray-200">
+              @foreach($questions as $question)
+              <tr>
+                <div class="mt-3 space-y-3 rounded-lg bg-white p-4 shadow">
+                  <div class="flex items-center space-x-2 text-sm">
+                    <div class="font-bold uppercase text-gray-900">{{ ($loop->index + 1) }}</div>
+                    <div class="text-gray-900">
+                      @if ($question->account_type=='1')
+                      School
+                      @elseif ($question->account_type=='2')
+                          Hospital
+                      @endif
+                    </div>
+                  </div>
+                  <div class="flex items-center space-x-2 text-sm">
+                    <div class="font-bold uppercase text-blue-500">Account Type:</div>
+                    <div class="text-gray-900">School</div>
+                  </div>
+                  <div class="block items-center text-sm">
+                    <div class="mb-2 font-bold uppercase text-teal-600">Question:</div>
+                    <div class="leading-0 text-md inline-flex rounded-full bg-green-100 px-0 text-xs font-semibold text-green-800">DEAN/CHAIRMAN/DEPARTMENT HEAD</div>
+                    <div class="text-gray-900">Filipino citizen and of good moral character</div>
+                  </div>
+                  <div class="flex items-center space-x-2 text-sm">
+                    <a href="https://www.digitalmonitoringsystem.online/questions/1/edit" class="mb-2 mr-2 font-medium text-blue-600 hover:text-blue-900">Manage</a>
+                    <form class="inline-block" action="https://www.digitalmonitoringsystem.online/questions/1" method="POST" onsubmit="return confirm('Are you sure?');">
+                      <input type="hidden" name="_method" value="DELETE" />
+                      <input type="hidden" name="_token" value="IhM20lo39jfnfrgTJm1EXiXfe7Dv7WjuMJjldmlp" />
+                      <input type="submit" class="mb-2 mr-2 bg-white text-red-600 hover:text-red-900" value="Delete" />
+                    </form>
+                  </div>
+                </div>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
