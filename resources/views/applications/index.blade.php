@@ -186,13 +186,43 @@
                             @endif</div>
                         </div>
                         <div>
-                          <a href="https://www.digitalmonitoringsystem.online/applications/20220724154157cnphw0z935jsib2fl78162dcf7c529923/edit" class="focus:shadow-outline-gray mt-1 items-center rounded-md border border-transparent bg-blue-600 px-4 py-3 text-center text-xs font-semibold uppercase tracking-widest text-white transition duration-150 ease-in-out hover:bg-gray-700 focus:border-gray-900 focus:outline-none active:bg-gray-900 disabled:opacity-25">Accredit </a>
+                          @if (Auth::user()->user_type=="5")
 
-                          <form class="inline-block" action="https://www.digitalmonitoringsystem.online/applications/20220724154157cnphw0z935jsib2fl78162dcf7c529923" method="POST" onsubmit="return confirm('Approve?');">
-                            <input type="hidden" name="_method" value="DELETE" />
-                            <input type="hidden" name="_token" value="cVZZzOCBG4xTX24vuS6WBx18To0yB6zdDECYWUW2" />
-                            <input type="submit" class="focus:shadow-outline-gray mt-1 items-center rounded-md border border-transparent bg-green-600 px-4 py-3 text-center text-xs font-semibold uppercase tracking-widest text-white transition duration-150 ease-in-out hover:bg-gray-700 focus:border-gray-900 focus:outline-none active:bg-gray-900 disabled:opacity-25" value="Approve" />
-                          </form>
+                          @if ($application->status=='0')
+                          <a href="{{ route('applications.show', $application->application_id) }}" class="text-center items-center px-4 py-3 bg-blue-600 mt-1 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Review</a>
+                          @endif
+
+                          @if ($application->status=='2')
+                          <a href="{{ route('applications.edit', $application->application_id) }}" class="text-center items-center px-4 py-3 bg-blue-600 mt-1 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Amend</a>
+                          @endif
+
+                          @if ($application->status=='1')
+                          <a href="{{ route('certificate', $application->application_id) }}" class="text-center items-center px-4 py-3 bg-blue-600 mt-1 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150" target="_blank">Certificate</a>
+                          @endif
+
+                          @else
+
+                          @if ($application->status=='1')
+                          <a href="{{ route('certificate', $application->application_id) }}" class="text-center items-center px-4 py-3 bg-blue-600 mt-1 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150" target="_blank">Certificate</a>
+                          @else
+                          <a href="{{ route('applications.edit', $application->application_id) }}" class="text-center items-center px-4 py-3 bg-blue-600 mt-1 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Accredit</a>
+                          @endif
+
+                          @if ($application->status<>'1' && (Auth::user()->user_type<>"2" && Auth::user()->user_type<>"3"))
+                                <form class="inline-block" action="{{ route('applications.destroy', $application->application_id) }}" method="POST" onsubmit="return confirm('Approve?');">
+                                  <input type="hidden" name="_method" value="DELETE">
+                                  <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                  <input type="submit" class="text-center items-center px-4 py-3 bg-green-600 mt-1 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150" value="Approve">
+                                </form>
+                                @endif
+
+
+
+
+
+
+
+                                @endif
                         </div>
                       </div>
                     </tr>
