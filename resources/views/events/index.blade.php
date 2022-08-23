@@ -17,7 +17,7 @@
         @endif
 
           
-        <div class="flex flex-col">
+        <div class="flex flex-col hidden md:block">
           <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                 <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
@@ -74,6 +74,39 @@
   
               </div>
             </div>
+          </div>
+        </div>
+
+        <!-- Mobile -->
+        <div class="flex flex-col md:hidden mt-3">
+          <table>
+            <tbody class="bg-white divide-y divide-gray-200">
+              @foreach ($events as $event)
+              <tr>
+                <div class="mt-3 space-y-3 rounded-lg bg-white p-4 shadow">
+                  <div class="flex items-center space-x-2 text-sm">
+                    <div class="font-bold uppercase text-blue-300">Client Name:</div>
+                    <div class="text-gray-900">{{ $event->user->client_name }}</div>
+                  </div>
+                  <div class="block items-center text-sm">
+                    <div class="font-bold uppercase text-blue-500">Requirements:</div>
+                    <div class="text-gray-900">{{ $event->title }}</div>
+                  </div>
+                  <div class="flex items-center space-x-2 text-sm">
+                    <div class="font-bold uppercase text-teal-600">Starting Date:</div>
+                    <div class="text-gray-900">{{ date('m/d/Y', strtotime($event->start)) }}</div>
+                  </div>
+                  <div class="flex items-center space-x-2 text-sm">
+                    <div class="font-bold uppercase text-teal-900">Due Date:</div>
+                    <div class="text-gray-900">{{ date('m/d/Y', strtotime($event->end)) }}</div>
+                  </div>
+                </div>
+              </tr> 
+              @endforeach     
+            </tbody>
+          </table>
+          <div class="d-flex justify-content-center">
+            {!! $events->links('vendor.pagination.tailwind') !!}
           </div>
         </div>
       </div>
