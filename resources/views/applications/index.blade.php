@@ -212,24 +212,24 @@
                           @else
                           <div class="mt-1 py-3">
                             <a href="{{ route('applications.edit', $application->application_id) }}" class="text-center items-center px-4 py-3 bg-blue-600 mt-1 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Accredit</a>
+
+                            @endif
+
+                            @if ($application->status<>'1' && (Auth::user()->user_type<>"2" && Auth::user()->user_type<>"3"))
+                                  <form class="inline-block" action="{{ route('applications.destroy', $application->application_id) }}" method="POST" onsubmit="return confirm('Approve?');">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <input type="submit" class="text-center items-center px-4 py-3 bg-green-600 mt-1 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150" value="Approve">
+                                  </form>
+                                  @endif
+
+
+
+
+
                           </div>
+
                           @endif
-
-                          @if ($application->status<>'1' && (Auth::user()->user_type<>"2" && Auth::user()->user_type<>"3"))
-                                <form class="inline-block" action="{{ route('applications.destroy', $application->application_id) }}" method="POST" onsubmit="return confirm('Approve?');">
-                                  <input type="hidden" name="_method" value="DELETE">
-                                  <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                  <input type="submit" class="text-center items-center px-4 py-3 bg-green-600 mt-1 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150" value="Approve">
-                                </form>
-                                @endif
-
-
-
-
-
-
-
-                                @endif
                         </div>
                       </div>
                     </tr>
