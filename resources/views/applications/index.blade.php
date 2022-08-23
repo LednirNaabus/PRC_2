@@ -197,7 +197,10 @@
                           @endif
 
                           @if ($application->status=='1')
-                          <a href="{{ route('certificate', $application->application_id) }}" class="text-center items-center px-4 py-3 bg-blue-600 mt-1 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150" target="_blank">Certificate</a>
+                          <div class="mt-1 py-3">
+                            <a href="{{ route('certificate', $application->application_id) }}" class="text-center items-center px-4 py-3 bg-blue-600 mt-1 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150" target="_blank">Certificate</a>
+
+                          </div>
                           @endif
 
                           @else
